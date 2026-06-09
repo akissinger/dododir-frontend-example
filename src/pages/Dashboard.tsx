@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useLocation } from 'wouter';
 import { FolderOpen, Plus, Trash2 } from 'lucide-preact';
-import { api, type ApiProject } from '../api';
+import { api, type DProject } from '../api';
 import { currentUser, clearAuth } from '../auth';
 
 export function Dashboard() {
     const [, navigate] = useLocation();
-    const [projects, setProjects] = useState<ApiProject[]>([]);
+    const [projects, setProjects] = useState<DProject[]>([]);
     const [newName, setNewName] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);

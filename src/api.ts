@@ -25,32 +25,32 @@ async function request<T>(
 export const api = {
     auth: {
         register: (username: string, password: string, displayName: string, captchaToken: string) =>
-            request<{ token: string; user: ApiUser }>('POST', '/auth/register', { username, password, displayName, captchaToken }),
+            request<{ token: string; user: DUser }>('POST', '/auth/register', { username, password, displayName, captchaToken }),
         login: (username: string, password: string) =>
-            request<{ token: string; user: ApiUser }>('POST', '/auth/login', { username, password }),
-        me: () => request<{ user: ApiUser }>('GET', '/auth/me'),
+            request<{ token: string; user: DUser }>('POST', '/auth/login', { username, password }),
+        me: () => request<{ user: DUser }>('GET', '/auth/me'),
     },
     projects: {
-        list: () => request<{ projects: ApiProject[] }>('GET', '/projects'),
-        get: (id: string) => request<{ project: ApiProject }>('GET', `/projects/${id}`),
+        list: () => request<{ projects: DProject[] }>('GET', '/projects'),
+        get: (id: string) => request<{ project: DProject }>('GET', `/projects/${id}`),
         getBySlug: (username: string, projectname: string) =>
-            request<{ project: ApiProject }>('GET', `/projects/by/${encodeURIComponent(username)}/${encodeURIComponent(projectname)}`),
+            request<{ project: DProject }>('GET', `/projects/by/${encodeURIComponent(username)}/${encodeURIComponent(projectname)}`),
         create: (name: string, description?: string) =>
-            request<{ project: ApiProject }>('POST', '/projects', { name, description }),
-        update: (id: string, data: Partial<Pick<ApiProject, 'name' | 'description' | 'isPublic'>>) =>
-            request<{ project: ApiProject }>('PUT', `/projects/${id}`, data),
+            request<{ project: DProject }>('POST', '/projects', { name, description }),
+        update: (id: string, data: Partial<Pick<DProject, 'name' | 'description' | 'isPublic'>>) =>
+            request<{ project: DProject }>('PUT', `/projects/${id}`, data),
         delete: (id: string) => request<void>('DELETE', `/projects/${id}`),
     },
     files: {
         list: (projectId: string, since?: number) =>
-            request<{ files: ApiFile[]; serverTime: number }>(
+            request<{ files: DFile[]; serverTime: number }>(
                 'GET',
                 `/projects/${projectId}/files${since ? `?since=${since}` : ''}`,
             ),
         create: (projectId: string, data: { path: string; content?: string | null; isDirectory: boolean }) =>
-            request<{ file: ApiFile }>('POST', `/projects/${projectId}/files`, data),
+            request<{ file: DFile }>('POST', `/projects/${projectId}/files`, data),
         update: (projectId: string, fileId: string, data: { content?: string | null; path?: string }) =>
-            request<{ file: ApiFile }>('PUT', `/projects/${projectId}/files/${fileId}`, data),
+            request<{ file: DFile }>('PUT', `/projects/${projectId}/files/${fileId}`, data),
         delete: (projectId: string, fileId: string) =>
             request<void>('DELETE', `/projects/${projectId}/files/${fileId}`),
     },
@@ -58,14 +58,14 @@ export const api = {
 
 // ---- Shared API types ----
 
-export interface ApiUser {
+export interface DUser {
     id: string;
     username: string;
     displayName: string;
     avatarUrl?: string | null;
 }
 
-export interface ApiProject {
+export interface DProject {
     id: string;
     userId: string;
     name: string;
@@ -75,7 +75,7 @@ export interface ApiProject {
     updatedAt: string;
 }
 
-export interface ApiFile {
+export interface DFile {
     id: string;
     projectId: string;
     path: string;

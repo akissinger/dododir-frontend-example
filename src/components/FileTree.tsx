@@ -1,16 +1,16 @@
 import { useState } from 'preact/hooks';
 import { ChevronDown, ChevronRight, FilePlus, FolderPlus, Pencil, Trash2 } from 'lucide-preact';
-import type { ApiFile } from '../api';
+import type { DFile } from '../api';
 
 interface TreeNode {
     name: string;
     path: string;
     isDirectory: boolean;
     children: TreeNode[];
-    file?: ApiFile;
+    file?: DFile;
 }
 
-function buildTree(files: ApiFile[]): TreeNode[] {
+function buildTree(files: DFile[]): TreeNode[] {
     const root: TreeNode[] = [];
     const map = new Map<string, TreeNode>();
 
@@ -50,13 +50,13 @@ function buildTree(files: ApiFile[]): TreeNode[] {
 }
 
 interface Props {
-    files: ApiFile[];
+    files: DFile[];
     openFilePath: string | null;
     dirtyPaths: Set<string>;
-    onOpenFile: (file: ApiFile) => void;
+    onOpenFile: (file: DFile) => void;
     onCreateFile: (parentPath: string, isDirectory: boolean) => void;
-    onRenameFile: (file: ApiFile) => void;
-    onDeleteFile: (file: ApiFile) => void;
+    onRenameFile: (file: DFile) => void;
+    onDeleteFile: (file: DFile) => void;
 }
 
 export function FileTree({
@@ -102,10 +102,10 @@ interface NodeListProps {
     nodes: TreeNode[];
     openFilePath: string | null;
     dirtyPaths: Set<string>;
-    onOpenFile: (file: ApiFile) => void;
+    onOpenFile: (file: DFile) => void;
     onCreateFile: (parentPath: string, isDirectory: boolean) => void;
-    onRenameFile: (file: ApiFile) => void;
-    onDeleteFile: (file: ApiFile) => void;
+    onRenameFile: (file: DFile) => void;
+    onDeleteFile: (file: DFile) => void;
     depth: number;
 }
 

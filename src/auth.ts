@@ -1,11 +1,11 @@
 import { signal, computed } from '@preact/signals';
-import type { ApiUser } from './api';
+import type { DUser } from './api';
 
-export const currentUser = signal<ApiUser | null>(null);
+export const currentUser = signal<DUser | null>(null);
 export const authToken = signal<string | null>(localStorage.getItem('token'));
 export const isAuthenticated = computed(() => currentUser.value !== null);
 
-export function setAuth(token: string, user: ApiUser) {
+export function setAuth(token: string, user: DUser) {
     localStorage.setItem('token', token);
     authToken.value = token;
     currentUser.value = user;

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'preact/hooks';
 import { useLocation, useParams } from 'wouter';
-import { api, type ApiFile } from '../api';
+import { api, type DFile } from '../api';
 import { FileTree } from '../components/FileTree';
 import { TabBar, type Tab } from '../components/TabBar';
 import { CodeEditor } from '../components/CodeEditor';
@@ -9,7 +9,7 @@ export function EditorPage() {
     const { username, projectname } = useParams<{ username: string; projectname: string }>();
     const [, navigate] = useLocation();
     const [projectId, setProjectId] = useState<string>('');
-    const [files, setFiles] = useState<ApiFile[]>([]);
+    const [files, setFiles] = useState<DFile[]>([]);
     const [tabs, setTabs] = useState<Tab[]>([]);
     const [activeTabId, setActiveTabId] = useState<string | null>(null);
     const [contentMap, setContentMap] = useState<Record<string, string>>({});
@@ -44,7 +44,7 @@ export function EditorPage() {
         }
     }
 
-    function openFile(file: ApiFile) {
+    function openFile(file: DFile) {
         if (file.isDirectory) return;
         const existing = tabs.find((t) => t.id === file.id);
         if (existing) {
@@ -114,7 +114,7 @@ export function EditorPage() {
         }
     }
 
-    async function handleRenameFile(file: ApiFile) {
+    async function handleRenameFile(file: DFile) {
         const currentRelPath = file.path.replace(/^\//, '');
         const input = prompt('New path:', currentRelPath);
         if (!input?.trim()) return;
@@ -133,7 +133,7 @@ export function EditorPage() {
         }
     }
 
-    async function handleDeleteFile(file: ApiFile) {
+    async function handleDeleteFile(file: DFile) {
         if (!confirm(`Delete ${file.path}?`)) return;
         try {
             await api.files.delete(projectId, file.id);
