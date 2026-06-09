@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import { ChevronDown, ChevronRight, FilePlus, FolderPlus, Pencil, Trash2 } from 'lucide-preact';
-import type { ApiFile } from '../lib/api';
+import type { ApiFile } from '../api';
 
 interface TreeNode {
     name: string;

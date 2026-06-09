@@ -1,8 +1,8 @@
 import { Router, Route, Switch, useLocation } from 'wouter';
 import { useEffect } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { api } from './lib/api';
-import { currentUser, authToken } from './lib/state';
+import { api } from './api';
+import { currentUser, authToken } from './api';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';

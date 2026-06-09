@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'preact/hooks';
 import { useLocation, useParams } from 'wouter';
-import { api, type ApiFile } from '../lib/api';
+import { api, type ApiFile } from '../api';
 import { FileTree } from '../components/FileTree';
 import { TabBar, type Tab } from '../components/TabBar';
 import { CodeEditor } from '../components/CodeEditor';
