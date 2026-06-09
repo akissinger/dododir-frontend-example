@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useLocation } from 'wouter';
 import { FolderOpen, Plus, Trash2 } from 'lucide-preact';
-import { api, type ApiProject, currentUser, clearAuth } from '../api';
+import { api, type ApiProject } from '../api';
+import { currentUser, clearAuth } from '../auth';
 
 export function Dashboard() {
     const [, navigate] = useLocation();

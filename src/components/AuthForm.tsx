@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { useLocation } from 'wouter';
-import { api, setAuth } from '../api';
+import { api } from '../api';
+import { setAuth } from '../auth';
 
 declare global {
     interface Window {
