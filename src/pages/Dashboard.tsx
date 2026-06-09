@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useLocation } from 'wouter';
 import { FolderOpen, Plus, Trash2 } from 'lucide-preact';
-import { api, type DProject } from '../api';
+import { api, type DProject } from 'dododir';
 import { currentUser, clearAuth } from '../auth';
 
 export function Dashboard() {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { useLocation } from 'wouter';
-import { api } from '../api';
+import { api } from 'dododir';
 import { setAuth } from '../auth';
 
 declare global {

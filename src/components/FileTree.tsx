@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import { ChevronDown, ChevronRight, FilePlus, FolderPlus, Pencil, Trash2 } from 'lucide-preact';
-import type { DFile } from '../api';
+import type { DFile } from 'dododir';
 
 interface TreeNode {
     name: string;

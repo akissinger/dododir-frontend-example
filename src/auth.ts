@@ -1,5 +1,5 @@
 import { signal, computed } from '@preact/signals';
-import type { DUser } from './api';
+import type { DUser } from 'dododir';
 
 export const currentUser = signal<DUser | null>(null);
 export const authToken = signal<string | null>(localStorage.getItem('token'));

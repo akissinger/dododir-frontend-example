@@ -1,7 +1,7 @@
 import { Router, Route, Switch, useLocation } from 'wouter';
 import { useEffect } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { api } from './api';
+import { api } from 'dododir';
 import { currentUser, authToken } from './auth';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
