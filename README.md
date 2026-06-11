@@ -1,6 +1,8 @@
 # Dododir example frontend
 
-This project shows an example web application based on the project/file backend [Dododir](https://github.com/akissinger/dododir) and [Preact](https://preactjs.com/). To run the example:
+This project shows an example web application based on the project/file backend [Dododir](https://github.com/akissinger/dododir) and [Preact](https://preactjs.com/). It allows users to register new accounts, create projects, and create/edit files within those projects. For editing, it uses a [CodeMirror](https://codemirror.net/) editor configured for Markdown syntax highlighting. It is deliberately minimal. Feel free to clone it and modify it as you see fit.
+
+To run the example:
 
 ```bash
 git clone https://github.com/akissinger/dododir-frontend-example.git
