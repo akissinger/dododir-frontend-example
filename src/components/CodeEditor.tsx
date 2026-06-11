@@ -1,81 +1,20 @@
 import { useEffect, useRef } from 'preact/hooks';
-import { EditorState, type Extension } from '@codemirror/state';
-import { EditorView, keymap, lineNumbers, highlightActiveLineGutter, drawSelection, highlightSpecialChars, dropCursor, rectangularSelection, crosshairCursor, highlightActiveLine } from '@codemirror/view';
-import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands';
-import { javascript } from '@codemirror/lang-javascript';
-import { css } from '@codemirror/lang-css';
-import { html } from '@codemirror/lang-html';
-import { json } from '@codemirror/lang-json';
+import { EditorState } from '@codemirror/state';
+import { EditorView, keymap, lineNumbers } from '@codemirror/view';
+import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { markdown } from '@codemirror/lang-markdown';
-import { python } from '@codemirror/lang-python';
-import { foldGutter, indentOnInput, syntaxHighlighting, defaultHighlightStyle, bracketMatching, foldKeymap } from '@codemirror/language';
-import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete';
-import { searchKeymap, highlightSelectionMatches } from '@codemirror/search';
-import { lintKeymap } from '@codemirror/lint';
+import { syntaxHighlighting, defaultHighlightStyle } from '@codemirror/language';
 
-function languageExtension(filename: string): Extension {
+function languageExtension(filename: string) {
     const ext = filename.split('.').pop()?.toLowerCase() ?? '';
-    switch (ext) {
-        case 'js':
-        case 'mjs':
-        case 'cjs':
-            return javascript();
-        case 'ts':
-        case 'mts':
-        case 'cts':
-            return javascript({ typescript: true });
-        case 'jsx':
-            return javascript({ jsx: true });
-        case 'tsx':
-            return javascript({ typescript: true, jsx: true });
-        case 'css':
-        case 'scss':
-        case 'less':
-            return css();
-        case 'html':
-        case 'htm':
-            return html();
-        case 'json':
-        case 'jsonc':
-            return json();
-        case 'md':
-        case 'mdx':
-            return markdown();
-        case 'py':
-            return python();
-        default:
-            return [];
-    }
+    return ext === 'md' || ext === 'mdx' ? markdown() : [];
 }
 
-const baseExtensions: Extension[] = [
+const baseExtensions = [
     lineNumbers(),
-    highlightActiveLineGutter(),
-    highlightSpecialChars(),
     history(),
-    foldGutter(),
-    drawSelection(),
-    dropCursor(),
-    EditorState.allowMultipleSelections.of(true),
-    indentOnInput(),
     syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-    bracketMatching(),
-    closeBrackets(),
-    autocompletion(),
-    rectangularSelection(),
-    crosshairCursor(),
-    highlightActiveLine(),
-    highlightSelectionMatches(),
-    keymap.of([
-        ...closeBracketsKeymap,
-        ...defaultKeymap,
-        ...searchKeymap,
-        ...historyKeymap,
-        ...foldKeymap,
-        ...completionKeymap,
-        ...lintKeymap,
-        indentWithTab,
-    ]),
+    keymap.of([...defaultKeymap, ...historyKeymap]),
     EditorView.theme({
         '&': { height: '100%' },
         '.cm-scroller': { overflow: 'auto', fontFamily: "'JetBrains Mono', 'Fira Code', monospace" },
